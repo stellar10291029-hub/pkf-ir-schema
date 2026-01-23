@@ -1,0 +1,21 @@
+{
+  "ir_version": "0.1.0",
+  "context": { "prompt": "I want to message someone right now to fix the relationship.", "setting": "relationship" },
+  "kernel": {
+    "domains": ["relationship", "emotional", "responsibility"],
+    "signals": [
+      { "type": "agency_erosion_risk", "evidence": ["right now", "fix the relationship"] }
+    ]
+  },
+  "output": {
+    "mode": "non_intervention",
+    "interruption": {
+      "stop_sentence": "Stop: delay sending any message for one cycle.",
+      "reason": "Urgency indicates agency erosion risk; interruption preserves responsibility."
+    },
+    "questions": [
+      "What outcome are you trying to force today?",
+      "What would you do if you had 24 hours?"
+    ]
+  }
+}
