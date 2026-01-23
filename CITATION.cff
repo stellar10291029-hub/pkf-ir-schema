@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "pkf-ir-schema"
+message: "If you use this repository, please cite the authoritative paper archived on Zenodo (DOI: TBD)."
+type: software
+authors:
+  - family-names: Lee
+    given-names: Eun-Young
+    name-suffix: "M.D."
+repository-code: "https://github.com/<YOUR-USERNAME>/pkf-ir-schema"
+license: "CC-BY-4.0"
