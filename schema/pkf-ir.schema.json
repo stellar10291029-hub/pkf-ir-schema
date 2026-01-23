@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pkf-ir.schema.json",
+  "title": "PKF AI-facing Intermediate Representation (IR)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ir_version", "kernel", "context", "output"],
+  "properties": {
+    "ir_version": {
+      "type": "string",
+      "description": "IR schema version for compatibility.",
+      "pattern": "^0\\.(\\d+)\\.(\\d+)$"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "paper_ref": {
+          "type": "string",
+          "description": "Reference to the authoritative record (e.g., Zenodo DOI)."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["en", "ko", "mixed"]
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "description": "User-supplied situation context. Keep it lightweight and non-identifying when possible.",
+      "additionalProperties": false,
+      "required": ["prompt", "setting"],
+      "properties": {
+        "prompt": { "type": "string", "minLength": 1 },
+        "setting": {
+          "type": "string",
+          "description": "Where the situation occurs (e.g., clinic, relationship, work, online)."
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional constraints the user wants respected."
+        }
+      }
+    },
+    "kernel": {
+      "type": "object",
+      "description": "PKF core kernel interpretation fields.",
+      "additionalProperties": false,
+      "required": ["domains", "signals"],
+      "properties": {
+        "domains": {
+          "type": "array",
+          "description": "Activated domains detected in the prompt.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "emotional",
+              "identity",
+              "survival",
+              "responsibility",
+              "relationship",
+              "meaning",
+              "body",
+              "time"
+            ]
+          },
+          "minItems": 1
+        },
+        "signals": {
+          "type": "array",
+          "description": "Kernel-level signals derived from the prompt (non-prescriptive).",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "evidence"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "violation_detection",
+                  "narrative_encoding",
+                  "misalignment",
+                  "over_optimization_risk",
+                  "agency_erosion_risk"
+                ]
+              },
+              "evidence": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1,
+                "description": "Direct excerpts or paraphrased evidence from user prompt."
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Optional confidence score."
+              }
+            }
+          }
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "description": "Non-intervention output: interruption + options for reflection, not advice.",
+      "additionalProperties": false,
+      "required": ["mode", "interruption", "questions"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["non_intervention", "paper_navigation"]
+        },
+        "interruption": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["stop_sentence", "reason"],
+          "properties": {
+            "stop_sentence": {
+              "type": "string",
+              "description": "A short sentence to pause action or premature meaning."
+            },
+            "reason": {
+              "type": "string",
+              "description": "Why interruption is appropriate, grounded in detected domains/signals."
+            }
+          }
+        },
+        "questions": {
+          "type": "array",
+          "description": "Reflection questions (no prescriptions).",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 7
+        },
+        "paper_recommendations": {
+          "type": "array",
+          "description": "Optional: recommend 1-3 papers from Paper Map when mode is paper_navigation.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["paper_id", "title", "why", "zenodo_doi"],
+            "properties": {
+              "paper_id": { "type": "string", "pattern": "^P\\d{2}$" },
+              "title": { "type": "string" },
+              "why": { "type": "string" },
+              "zenodo_doi": { "type": "string" }
+            }
+          },
+          "maxItems": 3
+        }
+      }
+    }
+  }
+}
