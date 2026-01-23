@@ -1,0 +1,28 @@
+{
+  "ir_version": "0.1.0",
+  "context": { "prompt": "My pain flares when I feel dismissed, even if tests are normal.", "setting": "clinic" },
+  "kernel": {
+    "domains": ["body", "identity", "relationship", "meaning"],
+    "signals": [
+      {
+        "type": "violation_detection",
+        "evidence": ["feel dismissed", "tests are normal"]
+      },
+      {
+        "type": "narrative_encoding",
+        "evidence": ["pain flares when I feel dismissed"]
+      }
+    ]
+  },
+  "output": {
+    "mode": "non_intervention",
+    "interruption": {
+      "stop_sentence": "Pause: do not reduce this to 'nothing is wrong.'",
+      "reason": "Violation detection + narrative encoding suggests meaning-layer mismatch despite normal tests."
+    },
+    "questions": [
+      "What exactly feels violated or ignored?",
+      "When did this pattern start showing up?"
+    ]
+  }
+}
