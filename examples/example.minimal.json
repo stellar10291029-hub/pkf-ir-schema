@@ -1,0 +1,22 @@
+{
+  "ir_version": "0.1.0",
+  "meta": { "paper_ref": "Zenodo DOI: TBD", "language": "mixed" },
+  "context": { "prompt": "I feel stuck and pressured to decide immediately.", "setting": "work" },
+  "kernel": {
+    "domains": ["responsibility", "meaning"],
+    "signals": [
+      { "type": "over_optimization_risk", "evidence": ["pressured to decide immediately"] }
+    ]
+  },
+  "output": {
+    "mode": "non_intervention",
+    "interruption": {
+      "stop_sentence": "Pause: do not finalize meaning or action yet.",
+      "reason": "Responsibility + meaning activation under time pressure suggests over-optimization risk."
+    },
+    "questions": [
+      "What is the smallest reversible step?",
+      "Which part feels like an 'I must' sentence?"
+    ]
+  }
+}
