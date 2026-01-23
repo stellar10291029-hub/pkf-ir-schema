@@ -1,0 +1,6 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "PKF AI-facing Intermediate Representation (IR)"
+type: object
+required: [ir_version, kernel, context, output]
+additionalProperties: false
+# See schema/pkf-ir.schema.json for the authoritative definition in this repo.
