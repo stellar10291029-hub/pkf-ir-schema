@@ -18,7 +18,7 @@ The authoritative paper is archived on Zenodo (https://zenodo.org/records/180128
 - `schema/pkf-ir.schema.yaml` — YAML mirror
 - `examples/` — minimal examples
 
-Quick Notice
-This repository defines a protected non-intervention IR structure (PKF-IR).
-Commercial or production use requires author permission or licensing.
-For licensing inquiries: [stellar1029@naver.com]
+Correspondence: pkf.eunyoung@gmail.com
+This document serves as a canonical reference.
+Correspondence is limited to scholarly clarification or citation-related matters.
+
